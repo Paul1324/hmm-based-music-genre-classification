@@ -53,7 +53,8 @@ class MusicGenreClassifier:
         best_model = None
         best_params = None
         
-        param_combinations = list(itertools.product(range(3, 11), range(20, 26)))
+        # Original combinations
+        param_combinations = set(itertools.product(range(3, 11), range(20, 26)))
         
         for n_components, n_mfcc in param_combinations:
             try:

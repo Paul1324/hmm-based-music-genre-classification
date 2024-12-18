@@ -1,52 +1,52 @@
 {
     "blues": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "classical": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "country": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "disco": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "hiphop": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "jazz": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "metal": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "pop": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "reggae": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     },
     "rock": {
         "n_components": 3,
-        "n_mfcc": 20,
+        "n_mfcc": 26,
         "accuracy": 100.0
     }
 }
