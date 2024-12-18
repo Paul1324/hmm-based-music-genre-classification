@@ -113,6 +113,57 @@ def print_summary_statistics(results):
     
     return best_config
 
+def create_average_genre_performance(results):
+    """Create a chart showing average performance of each genre across all models."""
+    # Initialize dictionary to store accuracies for each genre
+    genre_accuracies = {}
+    
+    # Collect accuracies for each genre across all models
+    for config, result in results.items():
+        for genre, accuracy in result['per_genre_accuracy'].items():
+            if genre not in genre_accuracies:
+                genre_accuracies[genre] = []
+            genre_accuracies[genre].append(accuracy)
+    
+    # Calculate average accuracy and standard deviation for each genre
+    genres = sorted(genre_accuracies.keys())
+    avg_accuracies = [np.mean(genre_accuracies[g]) for g in genres]
+    std_accuracies = [np.std(genre_accuracies[g]) for g in genres]
+    
+    # Sort genres by average accuracy
+    sorted_indices = np.argsort(avg_accuracies)[::-1]
+    sorted_genres = [genres[i] for i in sorted_indices]
+    sorted_avgs = [avg_accuracies[i] for i in sorted_indices]
+    sorted_stds = [std_accuracies[i] for i in sorted_indices]
+    
+    # Create bar chart without error bars
+    plt.figure(figsize=(12, 6))
+    bars = plt.bar(sorted_genres, sorted_avgs, alpha=0.8)
+    plt.axhline(y=np.mean(sorted_avgs), color='r', linestyle='--',
+                label='Mean Across All Genres')
+    
+    plt.title('Average Genre Performance Across All Models')
+    plt.xlabel('Genre')
+    plt.ylabel('Average Accuracy (%)')
+    plt.xticks(rotation=45)
+    
+    # Add value labels on bars
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height,
+                f'{height:.1f}%', ha='center', va='bottom')
+    
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig('average_genre_performance.png', bbox_inches='tight', dpi=300)
+    plt.close()
+    
+    # Print detailed statistics
+    print("\nAverage Performance Across All Models:")
+    print("-" * 50)
+    for genre, avg, std in zip(sorted_genres, sorted_avgs, sorted_stds):
+        print(f"{genre:10}: {avg:.1f}% ± {std:.1f}%")
+
 def main():
     # Load results
     results_path = "./trained_models/evaluation_results/parameter_evaluation_results.json"
@@ -123,6 +174,7 @@ def main():
     create_parameter_heatmap(results)
     create_confusion_matrix(results, best_config)
     create_genre_performance_chart(results, best_config)
+    create_average_genre_performance(results)
 
 if __name__ == "__main__":
     main()
